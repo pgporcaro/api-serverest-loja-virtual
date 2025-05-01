@@ -18,7 +18,11 @@ jobs:
       contents: read
       pages: write
       id-token: write
-     
+    
+    environment:
+      name: github-pages
+      url: https://pgporcaro.github.io/api-serverest-loja-virtual/report.html
+
     # Etapas a serem realizadas
     steps:
       - name: Etapa 1 - Clonar Repositório do Projeto para a Máquina Virtual do GitHub Actions
