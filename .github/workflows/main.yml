@@ -33,7 +33,7 @@ jobs:
         run: sudo npm install -g newman-reporter-htmlextra
         
       - name: Etapa 4 - Executar Coleção do Postman
-        run: newman run ./API-serveRest.postman_collection.json -e ./TAPI-serveRest.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/report.html --verbose
+        run: newman run ./API-serveRest.postman_collection.json -e ./API-serveRest.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/report.html --verbose
      
       - name: Etapa 5 - Salvar Relatórios dos Testes Executados
         uses: actions/upload-artifact@v4  # Atualizado para a versão v4
