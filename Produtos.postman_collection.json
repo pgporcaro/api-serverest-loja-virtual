@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "7d193104-3aa6-448d-9816-f080c5b322cc",
+		"name": "Produtos",
+		"description": "# About this collection\n\nThis collection helps ensure your API continues to work as expected after updates or changes. It contains sample requests for a series of tests that validate different aspects of an API, including:\n\n1. **Status code verification:** We'll check if the API returns the expected status codes for various requests, ensuring reliability and proper error handling.\n2. **JSON schema verification:** We'll make sure the JSON response conforms to a specified JSON Schema, ensuring API contracts are honored.\n3. **Response time verification:** We'll verify that the API's response time is within the acceptable range, providing a smooth user experience and optimizing performance.\n4. **Response body verification:** We'll validate the structure and content of the response body for accuracy, ensuring the integrity of the data and preventing potential issues downstream.\n5. **Header verification:** We'll confirm the presence and correct values of specific headers in the response, enabling secure and well-structured communication between your app and its users.\n    \n\n## **Using this collection**\n\n**Step 1:** Send the sample requests and view the response and test results.\n\n**Step 2:** Replace the sample request URLs with your desired API endpoints.\n\n**Step 3:** Customize the tests in the \"Tests\" tab if needed. Don't forget to save your changes.\n\n**Step 4:** Run the collection by selecting \"Run\".\n\n### Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30818607",
+		"_collection_link": "https://paulo8-8536.postman.co/workspace/ServerestPaulo~d955e169-fbdb-4b4d-b018-ec433834a2c7/collection/30818607-7d193104-3aa6-448d-9816-f080c5b322cc?action=share&source=collection_link&creator=30818607"
+	},
+	"item": [
+		{
+			"name": "Buscar produto por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/produtos/{{_id}}?_id=&nome=&preco=&descricao=&quantidade=",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"{{_id}}"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": ""
+						},
+						{
+							"key": "nome",
+							"value": ""
+						},
+						{
+							"key": "preco",
+							"value": ""
+						},
+						{
+							"key": "descricao",
+							"value": ""
+						},
+						{
+							"key": "quantidade",
+							"value": ""
+						}
+					]
+				},
+				"description": "The test on this request asserts that the reponse has a \"200 OK\" status.\n\nYou can check for any HTTP status code using the same mechanism, for example `pm.response.to.have.status(403)` if your API should return an \"Unauthorized\" response."
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar produto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Describe the expected response shape with JSON Schema",
+							"// https://json-schema.org/",
+							"const expectedSchema = {",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"data\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": {",
+							"        \"type\": \"object\",",
+							"        \"properties\": {",
+							"          \"title\": {",
+							"            \"type\": \"string\"",
+							"          },",
+							"          \"author\": {",
+							"            \"type\": \"string\"",
+							"          },",
+							"          \"published\": {",
+							"            \"type\": \"integer\"",
+							"          }",
+							"        },",
+							"        \"required\": [",
+							"          \"title\",",
+							"          \"author\",",
+							"          \"published\"",
+							"        ]",
+							"      }",
+							"    }",
+							"  }",
+							"};",
+							"",
+							"// Test that the response matches the expected schema using built-in schema verification",
+							"pm.test('response matches JSON schema', () => {",
+							"    pm.response.to.have.jsonSchema(expectedSchema);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Powerbank baseus branco\",\n  \"preco\": 339,\n  \"descricao\": \"Carregador portatil\",\n  \"quantidade\": 222\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/produtos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos"
+					]
+				},
+				"description": "This request has a test using Postman's built-in support for JSON Schema verification to ensure that the response data matches the expected shape.\n\nSchema validation can be used to verify your API returns data in the right format, without worrying about the exact values. This might be helpful when testing various inputs for a consistent output format.\n\nLearn more about JSON Schema at [https://json-schema.org](https://json-schema.org/.)."
+			},
+			"response": []
+		},
+		{
+			"name": "Listar produtos cadastrados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify response time is less than 5 seconds\", function () {",
+							"    const fiveSecondsMs = 5_000; // 5 seconds in milliseconds",
+							"    pm.expect(pm.response.responseTime).to.be.below(fiveSecondsMs);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaW",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/produtos?_id=PzpWWqsjhNbgQiwr&nome=Powerbank baseus roxo&preco=199&descricao=Carregador portatil&quantidade=99",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "PzpWWqsjhNbgQiwr"
+						},
+						{
+							"key": "nome",
+							"value": "Powerbank baseus roxo"
+						},
+						{
+							"key": "preco",
+							"value": "199"
+						},
+						{
+							"key": "descricao",
+							"value": "Carregador portatil"
+						},
+						{
+							"key": "quantidade",
+							"value": "99"
+						}
+					]
+				},
+				"description": "This request has a test asserting that a response is received within a specific time limit (in this case 5 seconds). This is useful for ensuring consistent API performance.\n\nYou can access details of the response, such as response time, on the `pm.response` object. See the [response object documentation](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#scripting-with-response-data) for other properties available."
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir produto",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/produtos/{{_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"{{_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar  produto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ1OTY5NDg0LCJleHAiOjE3NDU5NzAwODR9.GkROgNSPsIV2tVDf-4HF0XUFRQ_CMhVxmeelaP_8mXw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Powerbank baseus verde\",\r\n  \"preco\": 259,\r\n  \"descricao\": \"Carregador portatil\",\r\n  \"quantidade\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/produtos/{{_id}}?_id=PzpWWqsjhNbgQiwr",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"{{_id}}"
+					],
+					"query": [
+						{
+							"key": "_id",
+							"value": "PzpWWqsjhNbgQiwr"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}

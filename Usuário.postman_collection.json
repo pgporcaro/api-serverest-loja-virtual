@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "c4051c2b-934e-4bb7-bbb3-972aa80c4546",
+		"name": "Usuário",
+		"description": "# About this collection\n\nPostman provides dynamic variables that use the [Faker library](https://www.npmjs.com/package/@faker-js/faker) to generate sample data, including random names, addresses, and email addresses.\n\nThis collection demonstrates the use of dynamic variables to create randomized mock data. The examples in this collection utilize various data types and showcase how dynamic variables can help simulate real-world data within your API testing environment.\n\n## Using this collection\n\n**Step 1: Send requests**\n\nSelect a request from the collection, review the request parameters and pre-request scripts, then hit \"Send\" to execute the request.\n\n**Step 2: Review the \"Body\" and \"Pre-request Script\"** **tabs**\n\nUnderstand how dynamic variables are used to generate mock data. Dynamic variables can be used in the request URL and Body, or even as part of a Pre-Request or Test script for more complex use cases (see \"Create mock blog post\" request).\n\n**Step 3: Customize (optional)**\n\nCustomize dynamic variables to better suit your specific use case. Save the changes, and execute the requests.\n\n**Step 4: Analyze responses**\n\nExamine the response body to see the generated mock data. Note that the responses will be different each time you send the request, as the dynamic variables ensure randomized data generation.\n\nEnjoy testing with diverse and dynamic data!\n\n## Resources\n\n[Dynamic variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30818607",
+		"_collection_link": "https://paulo8-8536.postman.co/workspace/ServerestPaulo~d955e169-fbdb-4b4d-b018-ec433834a2c7/collection/30818607-c4051c2b-934e-4bb7-bbb3-972aa80c4546?action=share&source=collection_link&creator=30818607"
+	},
+	"item": [
+		{
+			"name": "Cadastrar usuário",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um e-mail aleatório com base no timestamp\r",
+							"const randomEmail = `usuario_${Date.now()}@teste.com`;\r",
+							"\r",
+							"// Armazena na variável de ambiente ou global\r",
+							"pm.environment.set(\"email_aleatorio\", randomEmail);\r",
+							"\r",
+							"// Lista de nomes e sobrenomes (exemplo)\r",
+							"const nomes = [\"Ana\", \"Carlos\", \"Beatriz\", \"Eduardo\", \"Fernanda\", \"João\", \"Luciana\", \"Marcelo\"];\r",
+							"const sobrenomes = [\"Silva\", \"Souza\", \"Oliveira\", \"Lima\", \"Costa\", \"Gomes\", \"Almeida\", \"Ribeiro\"];\r",
+							"\r",
+							"// Gera um nome completo aleatório\r",
+							"const primeiroNome = nomes[Math.floor(Math.random() * nomes.length)];\r",
+							"const sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)];\r",
+							"const nomeCompleto = `${primeiroNome} ${sobrenome}`;\r",
+							"\r",
+							"// Armazena em variáveis do ambiente\r",
+							"pm.environment.set(\"primeiroNome\", primeiroNome);\r",
+							"pm.environment.set(\"sobrenome\", sobrenome);\r",
+							"pm.environment.set(\"nomeCompleto\", nomeCompleto);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"{{nomeCompleto}}\",\n  \"email\": \"{{email_aleatorio}}\",\n  \"password\": \"teste\",\n  \"administrador\": \"true\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/usuarios",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "This request shows an example of generating mock user data in the request body. You can use this to populate some users for testing your API or application, or to ensure that your API accepts a range of inputs within certain parameters."
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar usuário por id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/usuarios/{{_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuarios",
+						"{{_id}}"
+					]
+				},
+				"description": "This request shows an example of generating mock purchase details in the request body. It demonstrates a few finance-related dynamic variables, in addition to the ones for random ID, Integer, Boolean, and Timestamp."
+			},
+			"response": []
+		},
+		{
+			"name": "Listar usuários cadastrados",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Use a dynamic variable in script",
+							"// https://learning.postman.com/docs/writing-scripts/script-references/variables-list/",
+							"const loremParagraphs = pm.variables.replaceIn(\"{{$randomLoremParagraphs}}\");",
+							"",
+							"// $randomLoremParagraphs generates a string with multiple paragraphs separated by ",
+							"// newline control characters (\"\\n\"). Since we're using this in a JSON object, we ",
+							"// need to replace the newline control character with the JSON-safe string \"\\\\n\".",
+							"const blogPostContent = loremParagraphs.replace(/\\n/g, \"\\\\n\")",
+							"",
+							"// Make the result available as a variable for use in the request body",
+							"pm.variables.set('blogPostContent', blogPostContent)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/usuarios",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "This request shows an example of generating longer-form content, in this case, a blog post, and transforming mock data as part of a pre-request script.\n\nIn the body, we use dynamic variables to generate a name, a short set of words as a title, a 'slug' (URL-safe textual identifier like \"dolores-est-iusto\"), and a post summary.\n\nIn the pre-request script, we generate some paragraphs of text using `pm.variables.replaceIn`. We then transform this text to make it JSON-safe by replacing newline characters with escaped newline characters and setting the result to a variable we can reference in the body."
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir usuário",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/usuarios/{{_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuarios",
+						"{{_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar usuário",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um e-mail aleatório com base no timestamp\r",
+							"const randomEmail = `usuario_${Date.now()}@teste.com`;\r",
+							"\r",
+							"// Armazena na variável de ambiente ou global\r",
+							"pm.environment.set(\"email_aleatorio\", randomEmail);\r",
+							"\r",
+							"// Lista de nomes e sobrenomes (exemplo)\r",
+							"const nomes = [\"Ana\", \"Carlos\", \"Beatriz\", \"Eduardo\", \"Fernanda\", \"João\", \"Luciana\", \"Marcelo\"];\r",
+							"const sobrenomes = [\"Silva\", \"Souza\", \"Oliveira\", \"Lima\", \"Costa\", \"Gomes\", \"Almeida\", \"Ribeiro\"];\r",
+							"\r",
+							"// Gera um nome completo aleatório\r",
+							"const primeiroNome = nomes[Math.floor(Math.random() * nomes.length)];\r",
+							"const sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)];\r",
+							"const nomeCompleto = `${primeiroNome} ${sobrenome}`;\r",
+							"\r",
+							"// Armazena em variáveis do ambiente\r",
+							"pm.environment.set(\"primeiroNome\", primeiroNome);\r",
+							"pm.environment.set(\"sobrenome\", sobrenome);\r",
+							"pm.environment.set(\"nomeCompleto\", nomeCompleto);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"nome\": \"{{nomeCompleto}}\",\r\n \"email\": \"{{email_aleatorio}}\",\r\n \"password\": \"teste\",\r\n \"administrador\": \"true\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/usuarios/{{_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"usuarios",
+						"{{_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Usuário",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Gera um e-mail aleatório com base no timestamp\r",
+							"const randomEmail = `usuario_${Date.now()}@teste.com`;\r",
+							"\r",
+							"// Armazena na variável de ambiente ou global\r",
+							"pm.environment.set(\"email_aleatorio\", randomEmail);\r",
+							"\r",
+							"// Gera um nome de usuário simples\r",
+							"const nomes = [\"ana\", \"carlos\", \"beatriz\", \"eduardo\", \"fernanda\", \"joao\", \"luciana\", \"marcelo\"];\r",
+							"const sobrenomes = [\"silva\", \"souza\", \"oliveira\", \"lima\", \"costa\", \"gomes\", \"almeida\", \"ribeiro\"];\r",
+							"\r",
+							"const primeiroNome = nomes[Math.floor(Math.random() * nomes.length)];\r",
+							"const sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)];\r",
+							"const numero = Math.floor(Math.random() * 1000); // para garantir e-mails únicos\r",
+							"\r",
+							"const username = `${primeiroNome}.${sobrenome}${numero}`;\r",
+							"const dominio = \"exemplo.com\";\r",
+							"const email = `${username}@${dominio}`;\r",
+							"\r",
+							"// Gera uma senha baseada no username\r",
+							"const senha = `${username}_@2025`;\r",
+							"\r",
+							"// Armazena em variáveis\r",
+							"pm.environment.set(\"email_aleatorio\", email);\r",
+							"pm.environment.set(\"senhaAleatoria\", senha);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Email e senha foram enviados corretamente\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"email_aleatorio\"));\r",
+							"    // Valide mais conforme o comportamento da API\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZ1bGFub0BxYS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDU1MTgxLCJleHAiOjE3NDYwNTU3ODF9.sPt69DOAXh5oymws3op8wVfOfQF0lBWI25HYjxKkl8o",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"usuario_1746060754721@teste.com\",\r\n  \"password\": \"teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}

@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "015d2b33-bb31-40f5-98d4-1ec738a0ab4f",
+		"name": "Carrinhos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30818607",
+		"_collection_link": "https://paulo8-8536.postman.co/workspace/ServerestPaulo~d955e169-fbdb-4b4d-b018-ec433834a2c7/collection/30818607-015d2b33-bb31-40f5-98d4-1ec738a0ab4f?action=share&source=collection_link&creator=30818607"
+	},
+	"item": [
+		{
+			"name": "Cadastrar carrinho",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"a0EMt1BzAhCAVwoe\",\r\n      \"quantidade\": 5\r\n    },\r\n    {\r\n      \"idProduto\": \"rOHZsHNQqnCaTRGV\",\r\n      \"quantidade\": 5\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/carrinhos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carrinhos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar carrinhos cadastrados",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/carrinhos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carrinhos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar carrinho por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/carrinhos/{{_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carrinhos",
+						"{{_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Carrinho",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNob25nLmhhbGV5QGhvdG1haWwuY29tIiwicGFzc3dvcmQiOiI2QlEyODdmIiwiaWF0IjoxNzQ2MDU4NDQxLCJleHAiOjE3NDYwNTkwNDF9.9CMCKOpe-6YsOGTRmW7_q0lh1nSLQz3DFCWE_4XL52Y",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNob25nLmhhbGV5QGhvdG1haWwuY29tIiwicGFzc3dvcmQiOiI2QlEyODdmIiwiaWF0IjoxNzQ2MDU4NDQxLCJleHAiOjE3NDYwNTkwNDF9.9CMCKOpe-6YsOGTRmW7_q0lh1nSLQz3DFCWE_4XL52Y",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/carrinhos/concluir-compra",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carrinhos",
+						"concluir-compra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir carrinhos e retornar produtos para o estoque",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"description": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzdWFyaW9fMTc0NjA2MDc1NDcyMUB0ZXN0ZS5jb20iLCJwYXNzd29yZCI6InRlc3RlIiwiaWF0IjoxNzQ2MDYxMDk1LCJleHAiOjE3NDYwNjE2OTV9.WvOEgiv57fEGlKnrTloeqm3xcBQ0xuEqgYMmFsik2gE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/carrinhos/cancelar-compra",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"carrinhos",
+						"cancelar-compra"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
