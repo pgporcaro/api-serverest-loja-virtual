@@ -1,0 +1,56 @@
+name: API-serveRest
+on:
+  # Controla fluxo de trabalho
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Permite que você execute esse fluxo de trabalho manualmente na guia Actions
+  workflow_dispatch:
+  # Fluxo de trabalho
+jobs:
+
+  API-Tests-Postman-Collection:
+  # Executará a ultima versão do ubuntu com as permissões necessárias
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+     
+    # Etapas a serem realizadas
+    steps:
+      - name: Etapa 1 - Clonar Repositório do Projeto para a Máquina Virtual do GitHub Actions
+        uses: actions/checkout@v4
+      
+      - name: Etapa 2 - Verificar versão do Newman e do Node
+        run: |
+          newman --version
+          node --version
+      
+      - name: Etapa 3 - Instalar Newman-Reporter-Htmlextra
+        run: sudo npm install -g newman-reporter-htmlextra
+        
+      - name: Etapa 4 - Executar Coleção do Postman
+        run: newman run ./API-serveRest.postman_collection.json -e ./TAPI-serveRest.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/report.html --verbose
+     
+      - name: Etapa 5 - Salvar Relatórios dos Testes Executados
+        uses: actions/upload-artifact@v4  # Atualizado para a versão v4
+        if: always()
+        with:
+          name: teste-report
+          path: ./results/report.html
+     
+      - name: Etapa 6 - Configurar GitHub Pages para Hospedagem dos Relatórios
+        uses: actions/configure-pages@v5
+
+      - name: Etapa 7 - Fazer Upload dos Relatórios Gerados
+        uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: results/
+          
+      - name: Etapa 8 - Publicar Relatórios de Testes no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 
